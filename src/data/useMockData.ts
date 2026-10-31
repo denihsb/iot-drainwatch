@@ -33,24 +33,29 @@ export function useMockData(
     if (!enabled) {
       return;
     }
+    const timer = window.setInterval(() => setNow(new Date()), 1000);
+    return () => window.clearInterval(timer);
+  }, [enabled, scenario]);
+
+  useEffect(() => {
+    if (!enabled || scenario === 'offline') {
+      return;
+    }
     const timer = window.setInterval(() => {
-      setNow(new Date());
-      if (scenario !== 'offline') {
-        setReadings((current) => {
-          const measuredAt = new Date().toISOString();
-          const elapsedSeconds =
-            (Date.now() - new Date(current[0]?.measured_at ?? measuredAt).getTime()) / 1000;
-          const next = createMockReading(
-            scenario,
-            measuredAt,
-            elapsedSeconds,
-            nextId.current,
-            current,
-          );
-          nextId.current += 1;
-          return [...current, next];
-        });
-      }
+      setReadings((current) => {
+        const measuredAt = new Date().toISOString();
+        const elapsedSeconds =
+          (Date.now() - new Date(current[0]?.measured_at ?? measuredAt).getTime()) / 1000;
+        const next = createMockReading(
+          scenario,
+          measuredAt,
+          elapsedSeconds,
+          nextId.current,
+          current,
+        );
+        nextId.current += 1;
+        return [...current, next];
+      });
     }, MOCK_TICK_MS);
     return () => window.clearInterval(timer);
   }, [enabled, scenario]);

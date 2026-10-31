@@ -1,4 +1,5 @@
 export type Status = 'NORMAL' | 'WASPADA' | 'BAHAYA' | 'SENSOR_FAULT';
+export type DisplayStatus = Status | 'OFFLINE';
 
 export interface Reading {
   id: number;
