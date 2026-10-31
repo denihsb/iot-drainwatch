@@ -11,6 +11,7 @@ import ScenarioSwitcher from './components/ScenarioSwitcher';
 import StatusBadge from './components/StatusBadge';
 import { ErrorState } from './components/States';
 import { useDashboardData } from './data/useDashboardData';
+import { USE_MOCK } from './lib/constants';
 import { formatNumber, formatRelativeTime } from './lib/format';
 import { estimateMinutesToThreshold } from './lib/status';
 import type { RangeKey, Scenario } from './types';
@@ -19,7 +20,6 @@ function App() {
   const [range, setRange] = useState<RangeKey>('15m');
   const [scenario, setScenario] = useState<Scenario>('stabil');
   const data = useDashboardData(range, scenario);
-  const useMock = import.meta.env.VITE_USE_MOCK !== 'false';
   const displayStatus = data.connection === 'offline' ? 'OFFLINE' : data.latest?.status ?? 'NORMAL';
   const estimate =
     data.latest &&
@@ -42,7 +42,7 @@ function App() {
           lastUpdateAt={data.lastUpdateAt}
           realtime={data.realtime}
         />
-        {useMock && (
+        {USE_MOCK && (
           <ScenarioSwitcher value={scenario} onChange={setScenario} />
         )}
         <RangeSelector value={range} onChange={setRange} />
