@@ -55,4 +55,5 @@ export interface DashboardData {
   realtime: RealtimeStatus;
   loading: boolean;
   error: string | null;
+  warning: string | null;
 }

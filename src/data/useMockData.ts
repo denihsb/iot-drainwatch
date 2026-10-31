@@ -82,5 +82,6 @@ export function useMockData(
     realtime: 'connected',
     loading: false,
     error: null,
+    warning: null,
   };
 }

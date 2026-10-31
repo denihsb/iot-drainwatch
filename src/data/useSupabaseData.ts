@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { RealtimePostgresChangesPayload } from '@supabase/supabase-js';
 import { getConnection } from '../lib/connection';
-import { DEVICE_ID, RANGES } from '../lib/constants';
+import { DEFAULT_DEVICE_CONFIG, DEVICE_ID, RANGES } from '../lib/constants';
 import { mergeReadings } from '../lib/merge';
 import { getSupabaseClient, type Database } from '../lib/supabase';
 import type {
@@ -45,16 +45,23 @@ function emptyData(error: string | null, loading: boolean): DashboardData {
     realtime: 'disconnected',
     loading,
     error,
+    warning: null,
   };
 }
 
-function getLastUpdateAt(device: Device | null, latest: Reading | null): Date | null {
+function getLastUpdateAt(
+  device: Device | null,
+  latest: Reading | null,
+  now = new Date(),
+): Date | null {
   const deviceTime = device?.last_seen ? new Date(device.last_seen) : null;
   const readingTime = latest ? new Date(latest.measured_at) : null;
-  if (deviceTime && readingTime) {
-    return new Date(Math.max(deviceTime.getTime(), readingTime.getTime()));
+  const validDeviceTime = deviceTime && deviceTime <= now ? deviceTime : null;
+  const validReadingTime = readingTime && readingTime <= now ? readingTime : null;
+  if (validDeviceTime && validReadingTime) {
+    return new Date(Math.max(validDeviceTime.getTime(), validReadingTime.getTime()));
   }
-  return deviceTime ?? readingTime;
+  return validDeviceTime ?? validReadingTime;
 }
 
 export function useSupabaseData(range: RangeKey): DashboardData {
@@ -112,12 +119,16 @@ export function useSupabaseData(range: RangeKey): DashboardData {
     const lastUpdateAt = getLastUpdateAt(snapshot.device, latest);
     setData({
       ...snapshot,
+      config: snapshot.config ?? DEFAULT_DEVICE_CONFIG,
       latest,
       connection: getConnection(lastUpdateAt, new Date()),
       lastUpdateAt,
       realtime,
       loading: false,
       error: null,
+      warning: snapshot.config
+        ? null
+        : 'Konfigurasi perangkat tidak tersedia. Nilai default aman sedang digunakan.',
     });
   }, []);
 

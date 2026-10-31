@@ -19,6 +19,17 @@ function RangeSelector({ value, onChange }: RangeSelectorProps) {
             role="radio"
             aria-checked={value === range.key}
             onClick={() => onChange(range.key)}
+            onKeyDown={(event) => {
+              const index = RANGES.findIndex((item) => item.key === value);
+              if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                event.preventDefault();
+                onChange(RANGES[(index + 1) % RANGES.length].key);
+              }
+              if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                event.preventDefault();
+                onChange(RANGES[(index - 1 + RANGES.length) % RANGES.length].key);
+              }
+            }}
           >
             {range.label}
           </button>

@@ -175,6 +175,15 @@ select:focus-visible {
   margin-top: var(--space-4);
 }
 
+.configuration-warning {
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3);
+  color: var(--status-waspada);
+  background: var(--status-waspada-bg);
+  border-left: 3px solid var(--status-waspada);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
 .metric-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -512,6 +521,20 @@ select:focus-visible {
   }
 
   @media (max-width: 640px) {
+    .dashboard-header {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .connection-summary {
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    .brand {
+      max-width: 100%;
+    }
+
     .history-heading {
       align-items: stretch;
       flex-direction: column;

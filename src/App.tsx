@@ -50,6 +50,11 @@ function App() {
           <ErrorState message={data.error} />
         ) : (
           <>
+            {data.warning && (
+              <p className="configuration-warning" role="status">
+                {data.warning}
+              </p>
+            )}
             <div
               className="status-announcer"
               aria-live={displayStatus === 'BAHAYA' ? 'assertive' : 'polite'}
