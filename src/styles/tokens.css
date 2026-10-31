@@ -6,7 +6,23 @@
   --text: #14181f;
   --text-muted: #5b6573;
   --accent: #2563eb;
+  --status-normal: #15803d;
+  --status-normal-bg: #e7f5ec;
+  --status-waspada: #a16207;
+  --status-waspada-bg: #fbf1d9;
+  --status-bahaya: #b91c1c;
+  --status-bahaya-bg: #fbe6e6;
+  --status-fault: #6b21a8;
+  --status-fault-bg: #f1e8f8;
+  --status-offline: #5b6573;
+  --status-offline-bg: #e9ecf0;
   --radius: 6px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,5 +34,15 @@
     --text: #e8ecf1;
     --text-muted: #9aa5b3;
     --accent: #60a5fa;
+    --status-normal: #4ade80;
+    --status-normal-bg: #12301f;
+    --status-waspada: #facc15;
+    --status-waspada-bg: #33290a;
+    --status-bahaya: #f87171;
+    --status-bahaya-bg: #3a1616;
+    --status-fault: #c084fc;
+    --status-fault-bg: #2a1a3a;
+    --status-offline: #9aa5b3;
+    --status-offline-bg: #222a34;
   }
 }
