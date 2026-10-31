@@ -1,7 +1,7 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { SUPABASE_ANON_KEY, SUPABASE_URL } from './constants';
 
-interface Database {
+export interface Database {
   public: {
     Tables: {
       devices: {
