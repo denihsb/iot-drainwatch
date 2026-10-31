@@ -2,6 +2,7 @@ import { useState } from 'react';
 import AlertBanner from './components/AlertBanner';
 import DeviceInfo from './components/DeviceInfo';
 import Header from './components/Header';
+import HistoryTable from './components/HistoryTable';
 import LevelChart from './components/LevelChart';
 import MetricCard from './components/MetricCard';
 import RangeSelector from './components/RangeSelector';
@@ -91,6 +92,7 @@ function App() {
               <RateChart readings={data.readings} config={data.config} range={range} loading={data.loading} error={data.error} />
             </section>
             <DeviceInfo device={data.device} config={data.config} connection={data.connection} />
+            <HistoryTable history={data.history} loading={data.loading} error={data.error} />
           </>
         )}
       </div>

@@ -9,12 +9,25 @@ const absoluteTimeFormatter = new Intl.DateTimeFormat('id-ID', {
   timeStyle: 'medium',
 });
 
+const historyTimeFormatter = new Intl.DateTimeFormat('id-ID', {
+  timeZone: 'Asia/Jakarta',
+  day: '2-digit',
+  month: 'short',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+});
+
 export function formatNumber(value: number | null): string {
   return value === null ? '–' : numberFormatter.format(value);
 }
 
 export function formatAbsoluteTime(value: Date | string): string {
   return absoluteTimeFormatter.format(value instanceof Date ? value : new Date(value));
+}
+
+export function formatHistoryTime(value: Date | string): string {
+  return historyTimeFormatter.format(value instanceof Date ? value : new Date(value));
 }
 
 export function formatRelativeTime(value: Date | string | null, now = new Date()): string {
