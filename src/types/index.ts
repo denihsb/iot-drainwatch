@@ -35,3 +35,23 @@ export interface DeviceConfig {
 
 export type Connection = 'online' | 'offline' | 'unknown';
 export type RangeKey = '15m' | '1h' | '6h' | '24h';
+export type RealtimeStatus = 'connected' | 'connecting' | 'disconnected';
+export type Scenario =
+  | 'stabil'
+  | 'naik-perlahan'
+  | 'banjir'
+  | 'sensor-error'
+  | 'offline';
+
+export interface DashboardData {
+  device: Device | null;
+  config: DeviceConfig | null;
+  latest: Reading | null;
+  readings: Reading[];
+  history: Reading[];
+  connection: Connection;
+  lastUpdateAt: Date | null;
+  realtime: RealtimeStatus;
+  loading: boolean;
+  error: string | null;
+}
