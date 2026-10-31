@@ -2,8 +2,10 @@ import { useState } from 'react';
 import AlertBanner from './components/AlertBanner';
 import DeviceInfo from './components/DeviceInfo';
 import Header from './components/Header';
+import LevelChart from './components/LevelChart';
 import MetricCard from './components/MetricCard';
 import RangeSelector from './components/RangeSelector';
+import RateChart from './components/RateChart';
 import ScenarioSwitcher from './components/ScenarioSwitcher';
 import StatusBadge from './components/StatusBadge';
 import { ErrorState } from './components/States';
@@ -83,6 +85,10 @@ function App() {
                 unit={estimate === null ? undefined : 'menit'}
                 muted={displayStatus === 'OFFLINE'}
               />
+            </section>
+            <section className="chart-grid" aria-label="Grafik pengukuran">
+              <LevelChart readings={data.readings} config={data.config} range={range} loading={data.loading} error={data.error} />
+              <RateChart readings={data.readings} config={data.config} range={range} loading={data.loading} error={data.error} />
             </section>
             <DeviceInfo device={data.device} config={data.config} connection={data.connection} />
           </>

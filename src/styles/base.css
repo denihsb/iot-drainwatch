@@ -304,6 +304,45 @@ select:focus-visible {
   border-radius: var(--radius);
 }
 
+.chart-grid {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.chart-card {
+  min-width: 0;
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.chart-card h2 {
+  margin: 0 0 var(--space-3);
+  font-size: 16px;
+}
+
+.chart-frame {
+  height: 240px;
+  width: 100%;
+}
+
+.chart-state {
+  display: grid;
+  min-height: 240px;
+  place-items: center;
+}
+
+.chart-state button {
+  min-height: 40px;
+  padding: 0 var(--space-3);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
 .device-info h2 {
   margin: 0 0 var(--space-3);
   font-size: 16px;
@@ -354,6 +393,16 @@ select:focus-visible {
 
   .metric-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .chart-frame {
+    height: 280px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .chart-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
